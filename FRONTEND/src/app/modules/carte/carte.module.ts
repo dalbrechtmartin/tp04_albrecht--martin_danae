@@ -4,13 +4,13 @@ import { FormulaireComponent } from './formulaire/formulaire.component';
 import { ListeComponent } from './liste/liste.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CarteService } from './carte.service';
-
-
+import { FormatageCodeDirective } from './formulaire/formatage-code.directive';
 
 @NgModule({
   declarations: [
     FormulaireComponent,
-    ListeComponent
+    ListeComponent,
+    FormatageCodeDirective,
   ],
   imports: [
     CommonModule,

@@ -6,8 +6,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        main: '#921f4f',
-        secondary: '#836571',
+        main: 'black',
+        secondary: 'gray',
         danger: 'text-red-600',
       },
       fontFamily: {
@@ -24,6 +24,7 @@ module.exports = {
       },
       animation: {
         float: 'float 3s ease-in-out infinite',
+        floatless: 'float 5s ease-in-out infinite',
       },
     },
   },

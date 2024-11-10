@@ -48,7 +48,7 @@
     }
 
     p {
-        @apply font-handlee text-xl;
+        @apply text-xl;
     }
 
 }
