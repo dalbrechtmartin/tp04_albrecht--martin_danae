@@ -1,4 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, computed, effect } from '@angular/core';
+import { CarteService } from '../carte.service';
+import { Carte } from '../carte';
 
 @Component({
   selector: 'CarteListe',
@@ -6,44 +8,23 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrl: './liste.component.css'
 })
 export class ListeComponent implements OnInit, OnDestroy {
-  cartes = [
-    // Carte de test
-    {
-      nom: 'Danaé ALBRECHT--MARTIN',
-      code: '4234 5678 9012 3456',
-      ccv: '666',
-      mois: 3,
-      annee: 26
-    },
-    {
-      nom: 'Edouard MANGEL',
-      code: '5234 5678 9012 3456',
-      ccv: '123',
-      mois: 6,
-      annee: 25
-    },
-    {
-      nom: 'Edouard MANGEL',
-      code: '4234 5678 9012 3456',
-      ccv: '123',
-      mois: 6,
-      annee: 25
-    },
-    {
-      nom: 'Edouard MANGEL',
-      code: '5234 5678 9012 3456',
-      ccv: '123',
-      mois: 6,
-      annee: 25
-    },
-  ]
+  cartes = computed(() => this.carteService.getCartes());
 
-  constructor() { }
+  constructor(private carteService: CarteService) {
+    effect(() => {
+      console.log('Liste des cartes mise à jour'); // Debug
+    });
+  }
 
   ngOnInit(): void {
+    console.log('Initialisation de la liste des cartes'); // Debug
   }
 
   ngOnDestroy(): void {
   }
 
+  delCarte(indexCarte: number): void {
+    console.log('Suppression de la carte n°' + indexCarte); // Debug
+    this.carteService.delCarte(indexCarte);
+  }
 }

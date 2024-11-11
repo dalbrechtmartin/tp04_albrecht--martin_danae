@@ -88,7 +88,7 @@
                 <div class="flip-card-back">
                     <div class="strip"></div>
                     <div class="mstrip">
-                        <button class="button text-red-700">SUPPRIMER</button>
+                        <button (click)="delCarte(i)" class="button text-red-700">SUPPRIMER</button>
                     </div>
                     <div class="sstrip">
                         <p class="code">{{ carte.ccv }}</p>
