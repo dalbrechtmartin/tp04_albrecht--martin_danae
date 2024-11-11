@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy, signal, computed, effect } from '@angular/core';
+import { Component, OnInit, OnDestroy, computed, effect } from '@angular/core';
 import { CarteService } from '../carte.service';
-import { Carte } from '../carte';
 
 @Component({
   selector: 'CarteListe',
@@ -8,7 +7,7 @@ import { Carte } from '../carte';
   styleUrl: './liste.component.css'
 })
 export class ListeComponent implements OnInit, OnDestroy {
-  cartes = computed(() => this.carteService.getCartes());
+  cartes = computed(() => this.carteService.getCartes()());
 
   constructor(private carteService: CarteService) {
     effect(() => {

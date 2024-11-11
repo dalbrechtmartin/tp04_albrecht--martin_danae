@@ -7,20 +7,20 @@ import { Carte } from './carte';
 export class CarteService {
   private cartes = signal<Carte[]>([
     // Cartes de test
-    // {
-    //   nom: 'Danaé ALBRECHT--MARTIN',
-    //   code: '4234 5678 9012 3456',
-    //   ccv: 666,
-    //   mois: 3,
-    //   annee: 26
-    // },
-    // {
-    //   nom: 'Edouard MANGEL',
-    //   code: '5234 5678 9012 3456',
-    //   ccv: 123,
-    //   mois: 6,
-    //   annee: 25
-    // },
+    {
+      nom: 'Danaé ALBRECHT--MARTIN',
+      code: '4234 5678 9012 3456',
+      ccv: 666,
+      mois: 3,
+      annee: 26
+    },
+    {
+      nom: 'Edouard MANGEL',
+      code: '5234 5678 9012 3456',
+      ccv: 123,
+      mois: 6,
+      annee: 25
+    },
   ]);
 
   constructor() { }
