@@ -16,10 +16,10 @@ export class FormulaireComponent implements OnInit, OnDestroy {
 
     this.carteForm = this.fb.group({
       nom: ['', Validators.required],
-      code: ['', Validators.required], //Validators.pattern(/^[45][0-9]{15}$/)]], // Code carte = 16 chiffres commençant par 4 ou 5
-      ccv: ['', Validators.required], //Validators.pattern(/^[0-9]{3}$/)]], // CCV = 3 chiffres
-      mois: ['', Validators.required], //Validators.min(1), Validators.max(12), Validators.pattern(/^[0-9]{1,2}$/)]],
-      annee: ['', Validators.required], //Validators.min(anneeCourante), Validators.max(anneeCourante + 3), Validators.pattern(/^[0-9]{2}$/)]] // Une carte est valable 3 ans
+      code: ['', [Validators.required, Validators.pattern(/^[45]/), Validators.minLength(19)]], // Code carte = 16 chiffres (+ 3 espaces) commençant par 4 ou 5
+      ccv: ['', [Validators.required, Validators.minLength(3), Validators.pattern(/^[0-9]{3}$/)]], // CCV = 3 chiffres
+      mois: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.pattern(/^(0?[1-9]|1[0-2])$/)]], // Mois = 1 ou 2 chiffres (01 à 12)
+      annee: ['', [Validators.required, Validators.min(anneeCourante), Validators.max(anneeCourante + 3), Validators.pattern(/^[0-9]{2}$/)]] // Année = 2 chiffres (année courante à année courante + 3)
     });
   }
 

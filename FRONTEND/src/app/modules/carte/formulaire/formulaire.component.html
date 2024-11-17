@@ -1,9 +1,9 @@
 <form [formGroup]="carteForm" (ngSubmit)="onSubmit()">
     <div
         class="flex flex-col justify-around bg-black p-4 border border-white border-opacity-30 rounded-lg shadow-xl max-w-xs mx-auto">
-        <div class="flex flex-row items-center justify-between mb-3">
+        <div class="flex flex-row items-center justify-between">
             <input placeholder="Nom sur la carte" id="nom" formControlName="nom" type="text"
-                class="input mb-3 flex-grow" />
+                class="input flex-grow" />
             <div class="flex items-center justify-center relative w-14 h-9 bg-black">
                 <svg xml:space="preserve" viewBox="0 0 50 50" height="40px" width="40px" y="0px" x="0px"
                     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Layer_1"
@@ -37,19 +37,60 @@
                 </svg>
             </div>
         </div>
+        <!-- .dirty = si modifié / .touched = si "tenté de modifié" -->
+        <div *ngIf="carteForm.get('nom')?.invalid && (carteForm.get('nom')?.dirty || carteForm.get('nom')?.touched)"
+            class="error">
+            <small *ngIf="carteForm.get('nom')?.errors?.['required']">Un nom est requis.</small>
+        </div>
         <div class="flex flex-col space-y-3">
-            <input placeholder="0000 0000 0000 0000" id="code" formControlName="code" type="text" class="input"
+            <input placeholder="0000 0000 0000 0000" id="code" formControlName="code" type="text" class="input mt-3"
                 formatageCode />
+            <div *ngIf="carteForm.get('code')?.invalid && (carteForm.get('code')?.dirty || carteForm.get('code')?.touched)"
+                class="error">
+                <small *ngIf="carteForm.get('code')?.errors?.['required']">Un code est requis.</small>
+                <small *ngIf="carteForm.get('code')?.errors?.['pattern']">Le code est doit commencer par 4 ou 5.</small>
+                <small *ngIf="carteForm.get('code')?.errors?.['minlength']">Le code doit être de 16 chiffres.</small>
+            </div>
             <div class="flex flex-row justify-between">
                 <div class="flex items-center space-x-2">
-                    <input placeholder="MM" id="mois" formControlName="mois" type="text" class="input w-12" />
+                    <input placeholder="MM" id="mois" formControlName="mois" type="text" class="input w-12"
+                        formatageDate />
                     <span>/</span>
-                    <input placeholder="AA" id="annee" formControlName="annee" type="text" class="input w-12" />
+                    <input placeholder="AA" id="annee" formControlName="annee" type="text" class="input w-12"
+                        formatageDate />
                 </div>
-                <input placeholder="CVV" id="ccv" formControlName="ccv" type="text" class="input" />
+                <input placeholder="CVV" id="ccv" formControlName="ccv" type="text" class="input" formatageCCV />
+            </div>
+            <div class="flex flex-col">
+                <div *ngIf="carteForm.get('mois')?.invalid && (carteForm.get('mois')?.dirty || carteForm.get('mois')?.touched)"
+                    class="error">
+                    <small *ngIf="carteForm.get('mois')?.errors?.['required']">Le mois est requis.</small>
+                    <small *ngIf="carteForm.get('mois')?.errors?.['minlength']">Le mois doit être entre 1 et 12.</small>
+                    <small *ngIf="carteForm.get('mois')?.errors?.['pattern']">Le mois doit être un nombre
+                        valide.</small>
+                </div>
+                <div *ngIf="carteForm.get('annee')?.invalid && (carteForm.get('annee')?.dirty || carteForm.get('annee')?.touched)"
+                    class="error">
+                    <small *ngIf="carteForm.get('annee')?.errors?.['required']">L'année est requise.</small>
+                    <small *ngIf="carteForm.get('annee')?.errors?.['minlength']">L'année doit être de 2 chiffres.</small>
+                    <small *ngIf="carteForm.get('annee')?.errors?.['pattern']">L'année doit être valide.</small>
+                    <small *ngIf="carteForm.get('annee')?.errors?.['min']">L'année doit être supérieure à l'année précédente.</small>
+                </div>
+                <div *ngIf="carteForm.get('ccv')?.invalid && (carteForm.get('ccv')?.dirty || carteForm.get('ccv')?.touched)"
+                    class="error">
+                    <small *ngIf="carteForm.get('ccv')?.errors?.['required']">Le CCV est requis.</small>
+                    <small *ngIf="carteForm.get('ccv')?.errors?.['minlength']">Le CCV doit être de 3 chiffres.</small>
+                    <small *ngIf="carteForm.get('ccv')?.errors?.['pattern']">Le CCV est invalide.</small>
+                </div>
             </div>
         </div>
     </div>
 
-    <button type="submit">Enregistrer</button>
+    <button type="submit" class="button">Enregistrer
+        <svg class="svgIcon" viewBox="0 0 576 512">
+            <path
+                d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z">
+            </path>
+        </svg>
+    </button>
 </form>
